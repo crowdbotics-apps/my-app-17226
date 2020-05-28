@@ -1,0 +1,26 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+  <div class="section"></div>
+
+  <div class="center-align">
+    <h5>Are you sure you want to delete <div class="red-text text-darken-2"><b>{{ object.label }}</b></div>?</h5>
+    <br />
+
+    <div class='row' style="margin: 0px 30px 0px 30px;">
+      <div class="col xl4 s12" style="margin-bottom: 15px;">
+        <a href="{% url 'manage_bookable_input_list' slug=object.bookable.slug %}" class='col s12 btn-large blue-grey darken-1'>Cancel</a>
+      </div>
+      <div class="col xl8 s12">
+        <form method="post">{% csrf_token %}
+          <button type="submit" class='col s12 btn-large blue darken-1'>Confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
+        
+  <div class="section"></div>
+
+
+{% endblock content %}

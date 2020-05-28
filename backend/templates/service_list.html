@@ -1,0 +1,33 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="section"></div>
+<h4>Available services</h4>
+<p>The Asst Team is here to support you with the following services.</p>
+
+<div class="row" style="margin-top: 1rem;">
+    {% for bookable in object_list %}
+    <div class="col s12 m6 l3">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title" style="text-transform: uppercase; font-weight: bold">{{bookable.name}}</span>
+                <p>{{ bookable.description|truncatechars:55 }}</p>
+            </div>
+            <div class="card-action" style="padding: 0">
+                <div class=" center-align" style="">
+                    {% comment %}
+                        <p class="black-text text-darken-1" style="font-weight: 500; font-size: 2rem; margin-bottom: 1rem;">
+                            <code>${{bookable.price}}</code>
+                        </p> {% endcomment %}
+                    <a href="{% url 'service_booking' slug=bookable.slug %}" style="height: 100%; width: 100%; padding: 15px" class="btn black">
+                        <code>${{ bookable.price }} {{ bookable.unit }}</code>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

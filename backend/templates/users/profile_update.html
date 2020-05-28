@@ -1,0 +1,30 @@
+{% extends "base/template.html" %}
+
+{% block content %}
+
+<div class="section"></div>
+
+<div class="row">
+  <div class="col s12 l8 offset-l2">
+    <div class="card-panel" style="padding: 25px 80px 25px 80px;">
+
+      <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+
+        {% include "fields/form_non_field_errors.html" with form=form %}
+        {% include "fields/input_file.html" with field=form.avatar field_required=True %}
+        {% include "fields/input_text.html" with field=form.name %}
+        {% include "fields/input_text.html" with field=form.phone_number %}
+
+        <div class='row'>
+          <a href="{% url 'users_profile' %}" class='col s3 btn btn-large red darken-1'>Cancel</a>
+          <button type='submit' class='col s8 offset-s1 btn btn-large black darken-1'>Update Profile</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

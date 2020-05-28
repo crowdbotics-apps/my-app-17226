@@ -1,0 +1,46 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="section"></div>
+
+<a href="{% url 'manage_bookable_list' %}" class="btn black darken-2">Available Services</a>
+<a href="{% url 'manage_booked_services' %}" class="btn black darken-2">Booked Services</a>
+<a href="{% url 'manage_worker_list' %}" class="btn black darken-2 disabled">Workers</a>
+
+<div class="divider" style="margin-top: 1rem;"></div>
+
+<h4>Workers</h4>
+
+<a href="{% url 'manage_worker_create' %}" class="btn black">Create worker</a>
+<p style="margin-bottom: 3rem">This page is where you assign workers to services booked by clients.
+Only registered users appear in the Workers list. Therefore, be sure all employees are registered for Asst
+prior to assigning them tasks to complete.
+</p>
+
+<a href="{% url 'manage_worker_delete' %}" class="btn black darken-4">Delete a worker</a>
+
+<div class="section"></div>
+
+<div class="row">
+    {% for worker in object_list %}
+    <div class="col l3">
+        <div class="card-panel center-align">
+            {% if worker.profile.avatar %}
+            <img src="{{ worker.profile.avatar.url }}" alt="avatar" style="max-height: 5rem;"> <br>
+            {% else %}
+            <img src="{% static 'default-avatar.jpg' %}" alt="avatar" style="max-height: 5rem;"> <br>
+            {% endif %}
+            {{ worker.profile.name }} <br>
+            {{ worker.email }} <br>
+            {{ worker.profile.email }} <br>
+            {{ worker.profile.phone_number }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% load widget_tweaks %}
+
+<div class="row">
+    <div class="input-field col s12">
+      {{ field|add_class:"validate"|attr:"pattern:((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))" }}
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <p class="help-text">{{bookable.name|title}} is available from {{ bookable.hour_start }} to {{ bookable.hour_end }} in the format <code style="font-weight: bold">12:00 PM (HH:MM PM/AM)</code></p>
+    </div>
+    {% for error in field.errors %}
+      <span class="left red-text" >* {{ error }}</span>
+    {% endfor %}
+</div>

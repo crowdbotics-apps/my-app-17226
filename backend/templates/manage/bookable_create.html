@@ -1,0 +1,214 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+<style>
+.f_text_size {
+  font-size: 1.1rem;
+}
+.f_ml_small {
+  margin-left: 0.5rem;
+}
+.f_ml_big {
+  margin-left: 1rem;
+}
+.f_mr_big {
+  margin-right: 1rem;
+}
+</style>
+
+<div class="section"></div>
+
+<div class="row">
+  <p style="font-size: 1.75rem; display: inline-block;" >Create Bookable Service</p>
+  <a style="margin-left: 1rem; margin-bottom: 1rem;" class="btn blue-grey darken-1" href="{% url 'manage_bookable_list' %}">Cancel</a>
+</div>
+
+
+  <form method="POST" enctype="multipart/form-data" action="{% url 'manage_bookable_create' %}">
+    <div class="card" style="padding: 3rem;">
+      {% csrf_token %}
+
+      {% include 'fields/form_non_field_errors.html' with form=form %}
+
+      {% include 'fields/input_text.html' with field=form.name  %}
+
+      {% include 'fields/input_textarea.html' with field=form.description  %}
+
+      {% include 'fields/input_text.html' with field=form.price %}
+      
+      {% include 'fields/input_text.html' with field=form.unit %}
+
+      {% include 'fields/input_multiple_checkbox.html' with field=form.available_days %}
+
+      {% include 'fields/input_timepicker.html' with field=form.hour_start %}
+
+      {% include 'fields/input_timepicker.html' with field=form.hour_end %}
+
+      {% include 'fields/input_file.html' with field=form.thumbnail %}
+    </div>
+
+    <div class="card" style="padding: 3rem;">
+      <p style="font-size: 1.5rem; margin-top: 0;">Custom inputs for customers</p>
+
+      {{ form.custom_inputs }}
+
+      <div class="row" id="custom-inputs-preview">
+      <!-- Here goes the custom inputs added with jQuery -->
+      </div>
+
+      <div class="row">
+
+        <div class="input-field col s4">
+          <input type="text" id="f_label" />
+          <label for="f_label">Input label</label>
+        </div>
+
+        <div class="input-field col s4">
+          <select id="f_type">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="ft_text">Text</option>
+            <option value="ft_text_multiline">Text multiline</option>
+            <option value="ft_date">Date</option>
+            <option value="ft_time">Time</option>
+            <option value="ft_checkbox">Checkbox</option>
+          </select>
+          <label>Input type</label>
+        </div>
+
+        <div class="col s2">
+          <label>
+            <input id="f_required" type="checkbox" />
+            <span style="margin-top: 2rem;">Required</span>
+          </label>
+        </div>
+
+        <div class="col s2">
+          <button type="button" class="btn black lighten-1" style="margin-top: 1rem;" onclick="addCustomInput();">Add input</button>
+        </div>
+
+      </div>
+    </div>
+    
+    <div class="row center-align">
+      <button class="btn btn-large black" type="submit">Create Service</button>
+    </div>
+  </form>
+
+  <div class="section"></div>
+
+
+{% endblock content %}
+
+{% block scripts %}
+
+<script>
+  $(document).ready(function(){
+    $('.timepicker').timepicker();
+    $('select').formSelect();
+  });
+
+  var field_types = {
+    "ft_text": "Text",
+    "ft_text_multiline": "Text multiline",
+    "ft_date": "Date",
+    "ft_time": "Time",
+    "ft_checkbox": "Checkbox"
+  }
+
+  function createInput(label, field_type, field_required) {
+    var requiredText = field_required ? "(required)" : "";
+    var $newInput = $(
+      '<p class="f_text_size">' +
+        'Input label: ' +
+        '<b class="f_ml_small f_mr_big">' +
+          label +
+        '</b>' +
+        'Input type:' +
+        '<b class="f_ml_small f_mr_big">' +
+          field_types[field_type] +
+        '</b>' +
+        requiredText +
+      '</p>'
+    ); 
+    $removeButton = $(
+      '<button class="btn btn-small red darken-3 f_ml_big" type="button">Remove input</button>'
+    )
+    $removeButton.click(function() {
+      $newInput.remove();
+      removeCustomInput(label);
+    })
+    $removeButton.appendTo($newInput);
+    return $newInput;
+  }
+
+  function addCustomInput() {
+    var $label = $("#f_label");
+    var $field_type = $("#f_type");
+    var $field_required = $("#f_required");
+
+    var label = $label.val();
+    var field_type = $field_type.val();
+    var field_required = false;
+    if ($field_required.is(":checked")) {
+      field_required = true;
+    }
+
+    if (label.trim() === "" || field_type === null || field_type === undefined){
+      return;
+    }
+
+    var $customInputs = $("#id_custom_inputs");
+    var customInputs = [];
+    try {
+      customInputs = JSON.parse($customInputs.val());
+    } catch(error) {
+    }
+
+    var labelIsTaken = false;
+    for(var i = 0; i < customInputs.length; i++) {
+        if (customInputs[i].label === label) {
+            labelIsTaken = true;
+            break;
+        }
+    }
+    if (labelIsTaken) {
+      alert("The label is already used by another input!");
+      return;
+    }
+
+    customInputs.push(
+      {
+        label: label,
+        field_type: field_type,
+        field_required: field_required
+      }
+    );
+
+    $customInputs.val(JSON.stringify(customInputs));
+
+    var $newInput = createInput(label, field_type, field_required);
+    var $customInputsPreview = $("#custom-inputs-preview");
+    $customInputsPreview.append($newInput);
+
+    $label.val("");    
+  }
+
+  function removeCustomInput(label) {
+    var $customInputs = $("#id_custom_inputs");
+    var customInputs = [];
+    try {
+      customInputs = JSON.parse($customInputs.val());
+    } catch(error) {
+    }
+
+    customInputs = customInputs.filter(function(obj) {
+      return obj.label !== label;
+    })
+
+    $customInputs.val(JSON.stringify(customInputs));
+
+  }
+</script>
+
+{% endblock scripts %}

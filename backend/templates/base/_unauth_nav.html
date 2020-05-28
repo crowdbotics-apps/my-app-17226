@@ -1,0 +1,29 @@
+{% load static %}
+<nav class="navbar navbar-light navbar-expand-md">
+    <a href="/" target="_self" class="navbar-brand nuxt-link-exact-active nuxt-link-active">
+        <img src="{% static 'assets/img/logo.png' %}" width="100" height="70" class="hidden-md-down">
+    </a>
+    <div class="ml-auto"></div>
+    <div id="nav_collapse" class="navbar-collapse collapse" style="display:none;">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a target="_self" class="nav-link">
+                    <span title="Call: (612) 200-3919">Call: (612) 200-3919</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a target="_self" href="/accounts/login" class="nav-link">
+                    <span title="Manage Account">Manage Account</span>
+                </a>
+            </li>
+            <li class="nav-item" >
+                <a  target="_self" href="/accounts/signup" class="nav-link">
+                    <span class="book-button" title="Book Assistant">Book Assistant</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <button type="button" aria-label="Toggle navigation" aria-controls="nav_collapse" aria-expanded="false" class="navbar-toggler">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>

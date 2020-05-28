@@ -1,0 +1,22 @@
+{% load widget_tweaks %}
+
+<div class="row">
+    <div class="col s12">
+        <p>{{ field.label }}:</p>
+    </div>
+    <div class="col s12">
+        {% render_field field placeholder="Pick a date" class+="datepicker" %}
+        <p class="help-text">
+            {{ bookable.name|title }} is available {% with week_days='mon tue wed thu fri sat sun' %}
+                        {% for day in week_days.split %}
+                            {% if day in bookable.get_available_days %}
+                                <span>{{day|title}},</span>
+                            {% endif %}
+                        {% endfor %}
+                    {% endwith %}. Choose a start date. Questions about booking multiple days or {{ bookable.name|title }} for businesses? <a mailto="info@asstservices.com">Shoot us an email</a>.
+        </p>
+    </div>
+    {% for error in field.errors %}
+        <span class="left red-text">* {{ error }}</span>
+    {% endfor %}
+</div>

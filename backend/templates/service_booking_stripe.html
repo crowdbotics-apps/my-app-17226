@@ -1,0 +1,35 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+<div class="section"></div>
+<div class="card-panel">
+    <div class="center-align">
+        <p style="font-weight: 500; font-size: 3rem;">Redirecting to Checkout...</p>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+(function stripeRedirect() {
+    var url = new URL(window.location.href);
+    var session_id = url.searchParams.get("session_id");
+    if (session_id === null) {
+        return;
+    }
+    var stripe = Stripe('{{STRIPE_PUBLISHABLE_KEY|safe}}');
+    stripe.redirectToCheckout({
+        // Make the id field from the Checkout Session creation API response
+        // available to this file, so you can provide it as parameter here
+        // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+    sessionId: session_id
+    }).then(function (result) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `result.error.message`.
+    });
+})();
+</script>
+
+{% endblock scripts %}

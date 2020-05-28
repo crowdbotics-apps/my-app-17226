@@ -1,0 +1,34 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+
+<p>Manage custom inputs for <b>{{ bookable.name }}</b></p>
+
+<a href="{% url 'manage_bookable_input_create' slug=bookable.slug %}" class="btn black">Create input</a>
+
+<div class="section"></div>
+
+{% if object_list %}
+
+    <div class="row">
+    {% for custom_input in object_list %}
+        <div class="col s4">
+            <div class="card-panel">
+                <p>Label: {{ custom_input.label }}</p>
+                <p>Type: {{ custom_input.field_type }}</p>
+                <p>Required: {{ custom_input.field_required }}</p>
+                <a href="{% url 'manage_bookable_input_delete' bookable.slug custom_input.pk %}" class="btn black">Delete input</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+
+{% else %}
+
+    <h4>This service doesn't have any inputs yet.</h4>
+
+{% endif %}
+
+
+{% endblock content %}

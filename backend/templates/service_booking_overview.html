@@ -1,0 +1,31 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+<div class="section"></div>
+
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel" style="padding: 2.5rem;">
+
+            <p style="font-weight: 500; font-size: 2rem;">Booking Overview</p>
+
+            <p>{{ booked_service.name }}</p>
+            {{ booked_service.summary|linebreaks }}
+            <p>Total price: <span style="font-size: 1.5rem; font-weight: 500; margin-left: 1rem;">${{ booked_service.total_price }}</span></p>
+
+            <div class="center-align">
+                <a 
+                    href="{% url 'service_booking_stripe' %}?session_id={{booked_service.stripe_session_id}}" 
+                    class="btn btn-large blue"
+                >
+                    Continue to Checkout
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

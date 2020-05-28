@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="24px" viewBox="0 0 23 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>05 Icons/Categories/Customer Support</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="Medium_Icons_Hub" transform="translate(-741.000000, -826.000000)" stroke="#65EFE3">
+            <g id="05-Icons/Categories/Customer-Support" transform="translate(740.500000, 826.000000)">
+                <g id="headset" transform="translate(2.000000, 1.000000)">
+                    <path d="M12,22 L17,22 C17.6025301,22 18.6025301,22 20,22 C20,20.5021365 20,19.5021365 20,19 L20,16" id="Path" stroke-width="2"></path>
+                    <path d="M5,11 L0,11 L0,16 C0,16.4070911 0,17.0737577 0,18 C1.00375773,18 1.6704244,18 2,18 L5,18 L5,11 Z" id="Path" stroke-width="2"></path>
+                    <path d="M20,11 L15,11 L15,18 L18,18 C18.3295756,18 18.9962423,18 20,18 C20,17.0737577 20,16.4070911 20,16 L20,11 Z" id="Path" stroke-width="2"></path>
+                    <path d="M20,11 L20,10 C20,4.477 15.523,0 10,0 L10,0 C4.477,0 0,4.477 0,10 L0,11" id="Path" stroke-width="2"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

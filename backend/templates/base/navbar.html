@@ -1,0 +1,42 @@
+{% load static %}
+<nav class="transparent">
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo">
+          <img src="{% static 'assets/img/logo.png' %}" width="55" height="55">
+      </a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down text-black">
+        {% if user.is_authenticated %}
+            {% if perms.booking.manage %}
+            <li><a href="{% url 'manage_bookable_list' %}">Admin Dashboard</a></li>
+            {% endif %}
+            {% if user.profile.is_worker %}
+            <li><a href="{% url 'worker_dashboard' %}">Worker Dashboard</a></li>
+            {% endif %}
+            <li><a href="/">Available services</a></li>
+            <li><a href="{% url 'users_profile' %}">Profile</a></li>
+            <li><a href="/accounts/logout/">Log Out</a></li>
+        {% else %}
+            <li><a href="/accounts/login/">Login</a></li>
+            <li><a href="/accounts/signup/">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    {% if user.is_authenticated %}
+        {% if perms.booking.manage %}
+        <li><a href="{% url 'manage_bookable_list' %}">Admin Dashboard</a></li>
+        {% endif %}
+        {% if user.profile.is_worker %}
+        <li><a href="{% url 'worker_dashboard' %}">Worker Dashboard</a></li>
+        {% endif %}
+        <li><a href="/">Available services</a></li>
+        <li><a href="{% url 'users_profile' %}">Profile</a></li>
+        <li><a href="/accounts/logout/">Log Out</a></li>
+    {% else %}
+        <li><a href="/accounts/login/">Login</a></li>
+        <li><a href="/accounts/signup/">Sign Up</a></li>
+    {% endif %}
+  </ul>

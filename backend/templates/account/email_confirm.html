@@ -1,0 +1,28 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+<div class="section"></div>
+<div class="row">
+  	<div class="col s12 l6 offset-l3">
+  		<div class="card center-align" style="padding:20px;">
+  			<h5>Confirm E-mail Address</h5>
+  			{% if confirmation %}
+
+				<p>Please confirm that <a href="mailto:{{ confirmation.email_address.email }}">{{ confirmation.email_address.email }}</a> is an e-mail address for user {{ confirmation.email_address.user }}.</p>
+
+				<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+					{% csrf_token %}
+    					<button class="btn blue" type="submit">Confirm</button>
+				</form>
+
+			{% else %}
+
+				{% url 'account_email' as email_url %}
+
+				<p class="center-align">This e-mail confirmation link expired or is invalid. <br>Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.</p>
+
+			{% endif %}
+		</div>
+  	</div>
+  </div>
+{% endblock content %}

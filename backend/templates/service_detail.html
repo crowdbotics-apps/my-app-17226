@@ -1,0 +1,120 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="section"></div>
+
+<div class="row">
+
+    <div class="col s12 m9">
+        <div class="card">
+            <div class="card-image">
+            {% if bookable.thumbnail %}
+                <img class="responsive-img" style="height: 30rem" src="{{ bookable.thumbnail.url }}">
+            {% else %}
+                <img class="responsive-img" style="height: 30rem" src="{% static 'default-service-thumbnail.png' %}">
+            {% endif %}
+            
+            <span class="card-title" style="margin: 1rem 2rem; padding: 1rem 2rem; background-color: rgba(0, 0, 0, 0.5)">{{bookable.name}}</span>
+            </div>
+            <div class="card-content">
+                <p style="margin-top: 1rem; margin-left: 1rem;">{{ bookable.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m3">
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <p style="font-weight: 500;">Availability</p>
+                    <div class="divider" style="margin-top: 0.5rem; margin-bottom: 1rem;"></div>
+                    <p style="font-size: 12px; margin-bottom: 12px">{{ bookable.name|title }} by the Asst team is available on the following days and times</p>
+                    {% with week_days='mon tue wed thu fri sat sun' %}
+                        {% for day in week_days.split %}
+                            {% if day in bookable.get_available_days %}
+                                <div class="chip black darken-1 white-text" style="text-transform: uppercase; margin-bottom: .7rem;">{{day}}</div>
+                            {% else %}
+                                <div class="chip black-text text-lighten-1 grey lighten-3" style="text-transform: uppercase; margin-bottom: .7rem;">{{day}}</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+                <div style="margin: 1rem 0 1rem 0; font-size: 12px;">
+                    <code class="green-text text-darken-1" style="font-size: 1rem; font-weight: 500;">
+                         {{ bookable.hour_start }}
+                    </code>until
+                     <code class="green-text text-darken-1"  style="font-size: 1rem; font-weight: 500;">{{ bookable.hour_end }} </code>
+                </div>
+
+                <p style="font-weight: 500;">Pricing</p>
+                <div class="divider" style="margin-top: 0.5rem; margin-bottom: 1rem;"></div>
+
+                <div>
+                    <p style="text-align: left; font-size: 12px; margin-top: 4px; margin-bottom: 12px">
+                        If you would like to book {{ bookable.name|title }} on multiple occasions then we can easily support you.
+                        Business and large groups should <a href="mailto:info@asstservices.com">get in contact directly</a>.
+                    </p>
+
+                    <p class="black-text text-darken-1" style="font-weight: 500; font-size: 1.1rem;">
+                        <code class=""> ${{bookable.price}} / {{ bookable.unit }}</code>
+                    </p>
+                    <p></p>
+
+                    <a href="#book" style="width: 100%; margin: 15px 0" class="btn btn-large black">Book now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="book" class="row">
+    <div class="col s12 m9">
+        <div class="card" style="padding: 5rem;">
+
+            <form method="post">
+                <h4>Booking details</h4>
+                <p>Gettings started is really easy. We just need a few details. First, complete this form.
+                    Then place a credit card on file on the next screen after you click the submit button. Last, we contact to you to coordinate schedules.
+                </p>
+                {% csrf_token %}
+                {% include 'fields/form_non_field_errors.html' with form=form %}
+                {% for field in form %}
+                    {% with field.field.widget.attrs.asst_field_type as field_type %}
+                    
+                        {% if field_type == "ft_text" %}
+                            {% include 'fields/input_text.html' with field=field %}
+                        {% elif field_type == "ft_text_multiline" %}
+                            {% include 'fields/input_textarea.html' with field=field %}
+                        {% elif field_type == 'ft_date' %}
+                            {% include 'fields/input_date.html' with field=field %}
+                        {% elif field_type == 'ft_time' %}
+                            {% include 'fields/input_timepicker.html' with field=field %}
+                        {% elif field_type == 'ft_checkbox' %}
+                            {% include 'fields/input_checkbox.html' with field=field %}
+                        {% endif %}
+
+                    {% endwith %}
+                {% endfor %}
+                <div>
+                    <button class="btn btn-large black" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+$(document).ready(function(){
+    $('.timepicker').timepicker();
+    $('.datepicker').datepicker();
+  });
+</script>
+{% endblock scripts %}

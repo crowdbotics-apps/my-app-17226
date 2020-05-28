@@ -1,0 +1,48 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+<div class="section"></div>
+
+<div class="row">
+  <p style="font-size: 1.75rem; display: inline-block;" >Update Bookable Service</p>
+  <a style="margin-left: 1rem; margin-bottom: 1rem;" class="btn blue-grey darken-1" href="{% url 'manage_bookable_list' %}">Cancel</a>
+</div>
+
+  <form method="POST" enctype="multipart/form-data" action="{% url 'manage_bookable_update' slug=bookable.slug %}">
+    <div class="card" style="padding: 3rem;">
+      {% csrf_token %}
+
+      {% include 'fields/form_non_field_errors.html' with form=form %}
+
+      {% include 'fields/input_text.html' with field=form.name  %}
+
+      {% include 'fields/input_textarea.html' with field=form.description  %}
+
+      {% include 'fields/input_text.html' with field=form.price %}
+      
+      {% include 'fields/input_text.html' with field=form.unit %}
+
+      {% include 'fields/input_multiple_checkbox.html' with field=form.available_days %}
+        <p style="margin-left: .7rem; margin-bottom: 2.5rem;">
+            Current available days:
+            <code style="margin-left: .5rem">
+                {% for day in bookable.get_available_days %}{{ day|title }}, {% endfor %}
+            </code>
+        </p>
+
+      {% include 'fields/input_timepicker.html' with field=form.hour_start %}
+
+      {% include 'fields/input_timepicker.html' with field=form.hour_end %}
+
+      {% include 'fields/input_file.html' with field=form.thumbnail %}
+    </div>
+    
+    <div class="row center-align">
+      <button class="btn btn-large black" type="submit">Update Service</button>
+    </div>
+  </form>
+
+  <div class="section"></div>
+
+{% endblock content %}

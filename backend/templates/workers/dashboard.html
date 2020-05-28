@@ -1,0 +1,71 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+<style>
+.asst-title {
+    font-weight: 700;
+}
+.asst-bold {
+    font-weight: 500;
+}
+</style>
+
+
+<div class="section"></div>
+
+<p style="font-size: 1.75rem;">Services assigned to you</p>
+
+{% for booked_service in object_list %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel" style="padding: 1rem 3rem;">
+
+            <div class="row" style="margin-bottom: 0;">
+                <div class="col l4">
+                    <p class="asst-title">User info</p>
+                    <div class="divider"></div>
+                    <p>{{ booked_service.user.profile.name }}</p>
+                    <p>{{ booked_service.user.email }} </p>
+                    <p>{{ booked_service.user.profile.phone_number }}</p>
+                </div>
+                <div class="col l8">
+                    <p class="asst-title">Service info</p>
+                    <div class="divider"></div>
+                    <p><span class="asst-bold">{{ booked_service.name }}</span></p>
+                    <p>
+                        <a 
+                            onclick="$('#modal_{{booked_service.id}}').modal('open');" 
+                            class="asst-bold blue-text text-darken-1"
+                            style="cursor: pointer;"
+                        >
+                            Click here to view the summary
+                        </a>
+                        <div id="modal_{{booked_service.id}}" class="modal">
+                            <div class="modal-content">
+                                <h4>Summary for {{ booked_service.name }}</h4>
+                                <p>{{ booked_service.summary|linebreaks }}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a onclick="$('#modal_{{booked_service.id}}').modal('cloe');" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                            </div>
+                        </div>
+                    </p>
+                    <p>Total price: <span class="asst-bold">{{ booked_service.total_price }}</span></p>
+                    <p>Payment status: <span class="asst-bold">{{ booked_service.payment_status }}</span></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+$(document).ready(function(){
+    $('.modal').modal();
+});
+</script>
+{% endblock scripts %}

@@ -1,0 +1,43 @@
+.brand-logo {
+    color: black !important;
+}
+nav {
+    border: 1px solid #eee;
+    box-shadow: none;
+}
+.card {
+    box-shadow: none;
+    border: 1px solid #eee;
+}
+.btn {
+    box-shadow: none;
+}
+nav ul li {
+    border-left: 1px solid #eee;
+}
+nav ul a {
+    color: black !important;
+}
+.help-text {
+   margin-top: 0;
+    text-align: left;
+    font-size: 13px;
+    color: #aaaaaa;
+    font-family: sans-serif;
+}
+input:not([type]),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default),
+textarea.materialize-textarea {
+    background: #f6f8f9 !important;
+}
+

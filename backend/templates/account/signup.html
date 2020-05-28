@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asst Services</title>
+
+    <!-- MaterializeCSS Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <style>
+      .textarea-height {
+          height: 6rem !important;
+      }
+    </style>
+
+</head>
+<body class="main-color">
+    <main>
+      {% if messages %}
+        <div id="messages">
+          <div class="row" style="margin: 15px 15px 0px 15px;">
+            <div class="card col xl6 offset-xl3 s12">
+              <div class="col m11 s10">
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li style="margin-left: 10px;" {% if message.tags %} class="{{ message.tags }}" {% endif %} >
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+              </div>
+              <div class="col m1 s2">
+                <button onclick="closeMessages()" class="btn blue" style="margin-top: 8px;">X</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="container">
+        <div class="section"></div>
+
+        <div class="center-align">
+          <h5 class="black-text text-darken-2">Create a new Asst account</h5>
+          <div class="section"></div>
+
+          {% load widget_tweaks %}
+
+          <div class="row container">
+            <div class="lighten-4 col xl8 offset-xl2 s12" style="display: inline-block; padding: 10px 60px 15px 60px; border: 1px solid #EEE;">
+              <form class="col s12" id="signup_form" method="post" action="{% url 'account_signup' %}">
+              	{% csrf_token %}
+                <div class="section"></div>
+
+        				{% if form.non_field_errors %}
+                      {% for error in form.non_field_errors %}
+                        <p class="red-text">* {{ error }}</p>
+                      {% endfor %}
+                    {% endif %}
+
+                {% comment %} <div class='row'>
+                  <div class='input-field col s12'>
+                    {{ form.username|add_class:"validate" }}
+                    <label for='{{ form.username.id_for_label }}'>{{ form.username.label }}</label>
+                    {% for error in form.username.errors %}
+                      <span class="left red-text" >* {{ error }}</span>
+                    {% endfor %}
+                  </div>
+                </div> {% endcomment %}
+
+                <div class='row'>
+                      <div class='input-field col s12'>
+                        {{ form.email|add_class:"validate" }}
+                        <label for='{{ form.email.id_for_label }}'>{{ form.email.label }}</label>
+                        {% for error in form.email.errors %}
+                          <span class="left red-text" >* {{ error }}</span>
+                        {% endfor %}
+                      </div>
+                    </div>
+
+                <div class='row'>
+                  <div class='input-field col s12'>
+                    {{ form.password1|add_class:"validate" }}
+                    <label for='{{ form.password1.id_for_label }}'>{{ form.password1.label }}</label>
+                    {% for error in form.password1.errors %}
+                    <span class="left red-text" >* {{ error }} </span>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div class='row'>
+                  <div class='input-field col s12'>
+                    {{ form.password2|add_class:"validate" }}
+                    <label for='{{ form.password2.id_for_label }}'>{{ form.password2.label }}</label>
+                    {% for error in form.password2.errors %}
+                      <span class="left red-text" >* {{ error }}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <br />
+
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+
+                <div class="center-align">
+                  <div class='row'>
+                    <button type='submit' name='btn_login' class='col s12 btn btn-large black darken-1'>Sign Up</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+          <a href="{% url 'account_login' %}" class="black-text">Already registered? Click to log in</a>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- jQuery 3.x Compiled and minified JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+    <!-- MaterializeCSS Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      function closeMessages() {
+        $('#messages').slideUp("slow", function(){ $(this).remove();});
+      }
+    </script>
+
+    {% block scripts %}
+    {% endblock scripts %}
+</body>
+</html>

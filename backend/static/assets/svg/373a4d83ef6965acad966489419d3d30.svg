@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>05 Icons/Categories/Mobile_Dev@1x</title>
+    <desc>Created with Sketch.</desc>
+    <g id="05-Icons/Categories/Mobile_Dev" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="mobile-dev" transform="translate(4.000000, 1.000000)" stroke="#D31BDB" stroke-width="1.5">
+            <path d="M14.6666667,22 L1.46666667,22 C0.656333333,22 0,21.3436667 0,20.5333333 L0,1.46666667 C0,0.656333333 0.656333333,0 1.46666667,0 L14.6666667,0 C15.477,0 16.1333333,0.656333333 16.1333333,1.46666667 L16.1333333,20.5333333 C16.1333333,21.3436667 15.477,22 14.6666667,22 Z" id="Path"></path>
+            <rect id="Rectangle" x="2.93333333" y="2.93333333" width="10.2666667" height="13.2"></rect>
+            <circle id="Oval" cx="8.06666667" cy="19.0666667" r="1"></circle>
+            <polyline id="Path" points="6.6 8.06666667 5.13333333 9.53333333 6.6 11"></polyline>
+            <polyline id="Path" points="9.53333333 8.06666667 11 9.53333333 9.53333333 11"></polyline>
+        </g>
+    </g>
+</svg>

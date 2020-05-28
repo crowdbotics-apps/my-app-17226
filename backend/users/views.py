@@ -1,42 +1,30 @@
-from django.contrib.auth import get_user_model
+from django.views.generic import DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
-from django.views.generic import DetailView, RedirectView, UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from .models import UserProfile
 
-User = get_user_model()
-
-
-class UserDetailView(LoginRequiredMixin, DetailView):
-
-    model = User
-    slug_field = "username"
-    slug_url_kwarg = "username"
+from booking.models import BookedService
 
 
-user_detail_view = UserDetailView.as_view()
-
-
-class UserUpdateView(LoginRequiredMixin, UpdateView):
-
-    model = User
-    fields = ["name"]
-
-    def get_success_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
-
+class UserProfileObjectMixin():
     def get_object(self):
-        return User.objects.get(username=self.request.user.username)
+        return self.request.user.profile
 
 
-user_update_view = UserUpdateView.as_view()
+class ProfileDetailView(LoginRequiredMixin, SuccessMessageMixin, UserProfileObjectMixin, DetailView):
+    template_name = "users/profile_detail.html"
+    model = UserProfile
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["booked_services"] = BookedService.objects.filter(user=self.request.user)
+        return context
 
 
-class UserRedirectView(LoginRequiredMixin, RedirectView):
-
-    permanent = False
-
-    def get_redirect_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
-
-
-user_redirect_view = UserRedirectView.as_view()
+class ProfileUpdateView(LoginRequiredMixin, SuccessMessageMixin, UserProfileObjectMixin, UpdateView):
+    template_name = "users/profile_update.html"
+    model = UserProfile
+    fields = ['avatar', 'name', 'phone_number']
+    success_url = reverse_lazy('users_profile')
+    success_message = 'Your profile was updated successfully!'

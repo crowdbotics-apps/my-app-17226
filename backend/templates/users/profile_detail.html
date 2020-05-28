@@ -1,0 +1,90 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<style>
+    .asst-profile-title {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    .asst-section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+</style>
+
+<div class="section"></div>
+
+<div class="card-panel">
+    <div class="row" style="margin-bottom: 0;">
+        <div class="col l3">
+            {% if object.avatar %}
+                <img src="{{object.avatar.url}}" class="responsive-img" height="75" width="75" alt="avatar">
+            {% else %}
+                <p>Avatar is not set.</p>
+            {% endif %}
+            <p>{{ user.email }}</p>
+        </div>
+        <div class="col l3">
+            <p class="asst-profile-title">Name</p>
+            <p>{% firstof object.name "Name is not set." %}</p>
+        </div>
+        <div class="col l3">
+            <p class="asst-profile-title">Phone number</p>
+            <code>{% firstof object.phone_number "Phone number is not set." %}</code>
+        </div>
+        <div class="col l3">
+            <p class="center-align">
+                <a style="margin-top: 1rem; margin-bottom: 1rem;" class="btn black" href="{% url 'users_profile_update'%}">Update profile</a>
+                <a class="btn black darken-1" href="{% url 'account_change_password' %}">Change password</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="center-align">
+    <p class="asst-section-title" >Booked services</p>
+</div>
+<div class="row">
+    {% for booked_service in booked_services %}
+    <div class="col l6">
+        <div class="card">
+            <div class="card-content">
+                <div class="center-align">
+                    <span class="card-title">
+                        {{ booked_service.name }}
+                    </span>
+                </div>
+                <div class="divider" style="margin-bottom: 2rem;"></div>
+                <p>{{ booked_service.summary|linebreaks }}</p>
+            </div>
+            <div class="card-action" style="height: 6.5rem; padding-top: 0;">
+                <div class="left">
+                    <p>Total price: <b>{{ booked_service.total_price }}</b></p>
+                    <p>Created at: <b>{{ booked_service.created }}</b></p>
+                </div>
+
+                <div class="right">
+                    <p>Payment status: <b>{{ booked_service.payment_status }}</b></p>
+                    {% if booked_service.payment_status == "pending" %}
+                        <p>
+                            <a 
+                                class="blue-text" 
+                                href="{% url 'service_booking_overview' %}?session_id={{booked_service.stripe_session_id}}"
+                            >
+                                Make a payment
+                            </a>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock content %}

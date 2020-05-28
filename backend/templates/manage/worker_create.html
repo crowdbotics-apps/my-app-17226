@@ -1,0 +1,30 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+ 
+  <div class="section"></div>
+
+    <div class="card-panel" style="padding: 3rem;">
+        <form method="post">
+        
+            {% csrf_token %}
+
+            {% include "fields/form_non_field_errors.html" with form=form %}
+            {% include "fields/input_select.html" with field=form.user %}
+
+            <div class='row'>
+            <a href="{% url 'manage_worker_list' %}" class='col s3 btn btn-large blue-grey darken-1'>Cancel</a>
+            <button type='submit' class='col s8 offset-s1 btn btn-large blue darken-1'>Create worker</button>
+            </div>
+
+        </form>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function(){
+      $('select').formSelect();
+    });
+  </script>
+{% endblock scripts %}

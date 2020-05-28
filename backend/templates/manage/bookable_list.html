@@ -1,0 +1,60 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+<style>
+.asst-bold {
+    font-weight: 500;
+}
+</style>
+
+<div class="section"></div>
+
+<a href="{% url 'manage_bookable_list' %}" class="btn black darken-2 disabled">Available Services</a>
+<a href="{% url 'manage_booked_services' %}" class="btn black darken-2">Booked Services</a>
+<a href="{% url 'manage_worker_list' %}" class="btn black darken-2">Workers</a>
+
+<div class="divider" style="margin-top: 1rem;"></div>
+
+<p style="font-size: 1.75rem;">Available services</p>
+
+<a href="{% url 'manage_bookable_create' %}" class="btn black">Create Service</a>
+
+<div class="section"></div>
+
+<div class="row">
+{% for bookable in object_list %}
+    <div class="col m4">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title" style="margin-bottom: 12px"><b>{{ bookable.name|title }}</b></span>
+
+                <p style="margin-bottom: 12px">{{ bookable.description|truncatechars:55 }}</p>
+                <p class="asst-bold">Price: <code>{{ bookable.price }}</code></p>
+                <p class="asst-bold">Price measurement unit: <code >{{ bookable.unit|title }}</code></p>
+                <p class="asst-bold">
+                    Available days:
+                    <code>
+                        {% for day in bookable.get_available_days %}{{ day|title }}, {% endfor %}
+                    </code>
+                </p>
+                {% comment %} <p style="margin-top: 1rem;">
+                    Assigned worker:
+                    <span style="font-weight: 500; margin-left: 0.5rem;">
+                        {% firstof bookable.assigned_worker "No worker assigned" %}
+                    </span>
+                </p> {% endcomment %}
+            </div>
+            <div class="card-action">
+                <a href="{% url 'service_booking' slug=bookable.slug %}" class="blue-text text-darken-3">Preview</a>
+                <a href="{% url 'manage_bookable_update' slug=bookable.slug %}" class="blue-text text-darken-3">Update Info</a>
+                <a href="{% url 'manage_bookable_input_list' slug=bookable.slug %}" class="blue-text text-darken-3">Update Inputs</a>
+                {% comment %} <a href="#" class="green-text text-darken-3">Assign worker</a> {% endcomment %}
+                <a href="{% url 'manage_bookable_delete' slug=bookable.slug %}" class="red-text text-darken-3">Delete</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock content %}

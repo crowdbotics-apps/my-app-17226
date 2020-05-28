@@ -1,0 +1,14 @@
+<div class='row'>
+    <div class='file-field input-field col s12'>
+      <div class="btn blue">
+        <span>{{ field.label }}</span>
+        <input type="file" name="{{ field.name }}" {% if field.required %} required {% endif %} id="{{ field.id_for_label }}">
+      </div>
+      <div class="file-path-wrapper">
+        <input type="text" class="file-path" placeholder="{% if field.value %}{{ field.value }}{% else %}Choose a file{% endif %}">
+      </div>
+    </div>
+    {% for error in field.errors %}
+      <span class="left red-text" >* {{ error }}</span>
+    {% endfor %}
+</div>

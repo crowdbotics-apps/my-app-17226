@@ -1,0 +1,397 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Asst Services</title>
+    <meta property="og:title" content="Asst Services"/>
+    <meta name="twitter:title" content="Asst Services"/>
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'favicon.ico' %}" rel="shortcut icon" />
+</head>
+<body data-gr-c-s-loaded="true">
+<div id="__nuxt">
+    <div id="__layout">
+        <div class="layout-base" data-v-7e7e6235="">
+            <div class="layout-base__body" data-v-7e7e6235="">
+                <div class="default-layout" data-v-7e7e6235="">
+                    <header id="app-header" data-v-7e7e6235="">
+                        {% include 'base/_unauth_nav.html' %}
+                    </header>
+                    <div class="default-layout__body" data-v-7e7e6235="">
+                        <content data-v-7e7e6235="">
+                            <div class="view-home default-layout__body__content" data-v-705d542e="" data-v-7e7e6235="">
+                                <div class="component-hero-home" data-v-18ab53b6="" data-v-705d542e="">
+                                    <div class="component-hero-home__title container" data-v-18ab53b6="">
+                                        <h1 data-v-18ab53b6="">
+                                            Personal assistants
+                                            <br data-v-18ab53b6="">
+                                            completely on demand
+                                        </h1>
+                                    </div>
+                                    <div class="component-hero-home__image-search" data-v-18ab53b6="">
+                                        <div class="container" data-v-18ab53b6="">
+                                            <img src="{% static 'assets/svg/3f755c88b64bd8e049d29d62c59f0fbb.svg' %}"
+                                                 class="component-hero-home__pattern" data-v-18ab53b6="">
+                                            <div class="component-hero-home__search-job-wrapper" data-v-18ab53b6="">
+
+                                                    <div class="component-search-bar component-search-bar--big">
+                                                        <div class="component-search-bar__item component-search-bar__item--keyword" style="border-color:#f5f7fa; text-align: center;">
+                                                            <select class="multiselect" id="services_select" onchange="location = this.value;" style="margin-right: 1rem;">
+                                                                <option value="#">Select a service</option>
+                                                                {% for service in service_list %}
+                                                                    <option value="{% url 'service_booking' slug=service.slug %}">{{ service.name }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                            
+                                                        </div>
+                                                        <div class="component-search-bar__item component-search-bar__item--location">
+                                                            <label for="services_select">
+                                                                Book an available service
+                                                            </label>
+                                                            {% comment %} <div class="dropdown btn-group b-dropdown component-search-bar__item__country" id="__BVID__36"></div> {% endcomment %}
+                                                        </div>
+                                                        <div class="component-search-bar__submit">
+                                                            {% comment %} <a href="{% url 'public_service_list' %}" style="color: white" class="btn component-search-bar__submit__button btn">
+                                                                Search
+                                                            </a> {% endcomment %}
+                                                        </div>
+                                                    </div>
+
+                                            </div> <!---->
+                                        </div>
+                                        <div class="component-hero-home__image-wrapper" data-v-18ab53b6="">
+                                            <img src="{% static 'assets/img/5797eb4.jpg' %}" data-v-18ab53b6="">
+                                        </div>
+                                    </div>
+
+                                </div> <!---->
+                                <div class="component-grid-categories" data-v-35c55c5a="" data-v-705d542e="">
+                                    <div class="container" data-v-35c55c5a="">
+                                        <h2 class="component-grid-categories__title" data-v-35c55c5>
+                                            Assistants <br data-v-35c55c5a="">by category
+                                        </h2>
+                                        <ul class="component-grid-categories__grid" data-v-35c55c5a="">
+                                            <li data-v-35c55c5a="">
+                                                <a href="" class="card-category" data-v-35c55c5a="">
+                                                    <img src="{% static 'assets/svg/45bfb656342e6becfc12dda4af66b074.svg' %}">
+                                                    <h5>Delivery and Shipping</h5>
+                                                </a>
+                                            </li>
+                                            <li data-v-35c55c5a="">
+                                                <a class="card-category" data-v-35c55c5a="">
+                                                    <img src="{% static 'assets/svg/136b12838d2cf16bfb0af0b72acc5122.svg' %}">
+                                                    <h5>Errand Running</h5>
+                                                </a>
+                                            </li>
+                                            <li data-v-35c55c5a="">
+                                                <a class="card-category" data-v-35c55c5a="">
+                                                    <img src="{% static 'assets/svg/a90c3fcb95a39d140aa2651f20d8ee96.svg' %}">
+                                                    <h5>Cleaners</h5>
+                                                </a>
+                                            </li>
+                                            <li data-v-35c55c5a="">
+                                                <a class="card-category" data-v-35c55c5a="">
+                                                    <img src="{% static 'assets/svg/5098bddab599270aacc209eadf2ed6be.svg' %}">
+                                                    <h5>Dog Walking</h5>
+                                                </a>
+                                            </li>
+                                            <li data-v-35c55c5a="">
+                                                <a class="card-category" data-v-35c55c5a="">
+                                                    <img src="{% static 'assets/svg/373a4d83ef6965acad966489419d3d30.svg' %}">
+                                                    <h5>Coffee Runs</h5>
+                                                </a>
+                                            </li>
+                                            <li data-v-35c55c5a="">
+                                                <a class="card-category" data-v-35c55c5a="">
+                                                    <img src="{% static 'assets/svg/84fadb4ef804a3856faa66df99e69966.svg' %}">
+                                                    <h5>Handy Service</h5>
+                                                </a>
+                                            </li>
+                                            <li data-v-35c55c5a="">
+                                                <a class="card-category" data-v-35c55c5a="">
+                                                    <img src="{% static 'assets/svg/56e3d8125fbc7817f6d37bb0da159c11.svg' %}">
+                                                    <h5>Yardwork and Removal</h5>
+                                                </a>
+                                            </li>
+                                            <li data-v-35c55c5a="">
+                                                <a class="card-category" data-v-35c55c5a="">
+                                                    <img src="{% static 'assets/svg/b258cbe9f2ed91136902a0cb80b79f61.svg' %}">
+                                                    <h5>General Help</h5>
+                                                </a>
+                                            </li>
+                                            <li data-v-35c55c5a="">
+                                                <a class="card-category" data-v-35c55c5a="">
+                                                    <img src="{% static 'assets/svg/3447d583e38368a6cca85921cc955ace.svg' %}">
+                                                    <h5>Contract Routine Service</h5>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <img src="{% static 'assets/svg/c50e03997229d2ae16222a82f9d2e3be.svg' %}" class="component-grid-categories__pattern" data-v-35c55c5a="">
+                                    </div>
+                                </div>
+                                <section class="view-home__section view-home__section--jobs" data-v-705d542e="">
+                                    <div class="container" data-v-705d542e="">
+                                        <div class="view-home__section__pattern" data-v-705d542e=""></div>
+                                        <div class="view-home__section__header" data-v-705d542e="">
+                                            <h2 data-v-705d542e="">How it works</h2>
+                                            <p data-v-705d542e="">
+                                                <span data-v-705d542e="">Simple and easy to use.</span>
+                                                <a href="/accounts/signup" target="_self" class="link-arrow" data-v-705d542e="">
+                                                    <span class="link-arrow__content">Find a service ⟶</span>
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <div class="row" data-v-705d542e="">
+                                            <div class="mb-30 col-md-6 col-lg-4" data-v-705d542e="">
+                                                <div class="card card-job" data-v-705d542e="">
+                                                    <a href="" class=""></a> <!---->
+                                                    <div class="card__header">
+                                                        <div class="category mt-10">
+                                                            <code class="category__content">
+                                                                Step 1
+                                                            </code>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__content">
+                                                        <div class="card-job__content">
+                                                            <h4 class="card-job__title">
+                                                                Select a Service
+                                                            </h4>
+                                                            <div class="bullet-inline-list text-gray-700" style="font-size:1rem;">
+                                                                Services are only available in the
+                                                                <a href="" class="">Minneapolis</a>
+                                                                <a href="" class="">St. Paul</a> area.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="mb-30 col-md-6 col-lg-4" data-v-705d542e="">
+                                                <div class="card card-job" data-v-705d542e="">
+                                                    <a href="" class=""></a> <!---->
+                                                    <div class="card__header">
+                                                        <div class="category mt-10">
+                                                            <code class="category__content">
+                                                                Step 2
+                                                            </code>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__content">
+                                                        <div class="card-job__content">
+                                                            <h4 class="card-job__title">
+                                                                Create an Account
+                                                            </h4>
+                                                            <div class="bullet-inline-list text-gray-700"
+                                                                 style="font-size:1rem;">
+                                                                No credit card required. Your privacy is protected.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__footer">
+                                                        <div class="media-item"
+                                                             style="align-items:center;flex-direction:row;">
+                                                            <div class="media-item__image media-item__image--image--default media-item__image--gap--default"></div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-30 col-md-6 col-lg-4" data-v-705d542e="">
+                                                <div class="card card-job" data-v-705d542e="">
+                                                    <a href="" class=""></a> <!---->
+                                                    <div class="card__header">
+                                                        <code class="category mt-10">
+                                                            <div class="category__content">
+                                                                Step 3
+                                                            </div>
+                                                        </code>
+                                                    </div>
+                                                    <div class="card__content">
+                                                        <div class="card-job__content">
+                                                            <h4 class="card-job__title">
+                                                                Book a Service
+                                                            </h4>
+                                                            <div class="bullet-inline-list text-gray-700" style="font-size:1rem;">
+                                                              Schedule a time and place where the work will be done. You won't be charged until work is complete.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="mb-30 col-md-6 col-lg-4" data-v-705d542e="">
+                                                <div class="card card-job" data-v-705d542e="">
+                                                    <a href="" class=""></a> <!---->
+                                                    <div class="card__header">
+                                                        <div class="category mt-10">
+                                                            <div class="category__content">
+                                                                Step 4
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__content">
+                                                        <div class="card-job__content">
+                                                            <h4 class="card-job__title">
+                                                                Work is performed
+                                                            </h4>
+                                                            <div class="bullet-inline-list text-gray-700" style="font-size:1rem;">
+                                                                An Asst team member shows up to your location and performs the work.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-30 col-md-6 col-lg-4" data-v-705d542e="">
+                                                <div class="card card-job" data-v-705d542e="">
+                                                    <a href="" class=""></a> <!---->
+                                                    <div class="card__header">
+                                                        <div class="category mt-10">
+                                                            <div class="category__content">
+                                                                Step 5
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__content">
+                                                        <div class="card-job__content">
+                                                            <h4 class="card-job__title">
+                                                                Payment is processed
+                                                            </h4>
+                                                            <div class="bullet-inline-list text-gray-700" style="font-size:1rem;">
+                                                                Once the work is performed then your payment is processed.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-30 col-md-6 col-lg-4" data-v-705d542e="">
+                                                <div class="card card-job" data-v-705d542e="">
+                                                    <a href="" class=""></a> <!---->
+                                                    <div class="card__header">
+                                                        <div class="category mt-10">
+                                                            <div class="category__content">
+                                                                Step 6
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__content">
+                                                        <div class="card-job__content">
+                                                            <h4 class="card-job__title">
+                                                                We do it all over again
+                                                            </h4>
+                                                            <div class="bullet-inline-list text-gray-700" style="font-size:1rem;">
+                                                                Setup services on multiple days and times and watch your productivity skyrocket.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="view-home__section view-home__section--startups" data-v-705d542e="">
+                                    <div class="container" data-v-705d542e="">
+                                        <div class="view-home__section__pattern" data-v-705d542e=""></div>
+                                        <div class="view-home__section__header" data-v-705d542e="">
+                                            <h2 data-v-705d542e="">Clients</h2>
+                                            <p data-v-705d542e="">
+                                                Here are some of our happy clients.
+                                            </p>
+                                        </div>
+                                        <div class="row" data-v-705d542e="">
+                                            <div class="mb-30 col-md-6 col-lg-4" data-v-705d542e="">
+                                                <div class="card card-startup" data-v-705d542e="">
+                                                    <a href="" class=""></a><!---->
+                                                    <div class="card__header">
+                                                        <div>
+                                                            <h4 slot="" class="card-title">Coplen Family</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__content">
+                                                        <div class="card-content">
+                                                            "Asst has helped my life so much. Having a big family gets kind of tuff.
+                                                            Asst helps me save so much time so I can focus on my kids. They clean my house and even help watch my little ones.
+                                                            They even run my errands while I'm at work and kisd are at school, which is a life saver. Thank you so much Asst."
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__footer">
+                                                        <div>
+                                                            <div class="card-footer-region">
+                                                                <div class="bullet-inline-list text-gray-700"
+                                                                     style="font-size:1rem;">
+                                                                    <span>Consumer Accounts</span>
+                                                                </div> <!----></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-30 col-md-6 col-lg-4" data-v-705d542e="">
+                                                <div class="card card-startup" data-v-705d542e="">
+                                                    <a href="" class=""></a> <!---->
+                                                    <div class="card__header">
+                                                        <div>
+                                                            <h4 slot="" class="card-title">Quickpack</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__content">
+                                                        <div class="card-content">
+                                                            "Is a packaging company located here in Minneapolis. Quick pack uses Asst for our weekly meeting Asst brings our
+                                                            lunches and helps around the office when needed. Would definitely recommend this service."
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__footer">
+                                                        <div>
+                                                            <div class="card-footer-region">
+                                                                <div class="bullet-inline-list text-gray-700"
+                                                                     style="font-size:1rem;">
+                                                                    <span>Enterprise Accounts</span>
+                                                                </div> <!---->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </content>
+                    </div>
+
+
+                    <footer class="app-footer" data-v-8a22a304="" data-v-7e7e6235="">
+                        <div class="app-footer__container container" data-v-8a22a304="">
+                            <div class="app-footer__countries" data-v-8a22a304="">
+                                <p data-v-8a22a304="">Asst Service is active in:</p>
+                                <ul class="app-footer__countries__items" data-v-8a22a304="">
+                                    <li class="app-footer__countries__items__item" data-v-8a22a304="">
+                                        Minneapolis
+                                    </li>
+                                    <li class="app-footer__countries__items__item" data-v-8a22a304="">
+                                        St. Paul
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="app-footer__menu" data-v-8a22a304="">
+                                <div class="app-footer__links" data-v-8a22a304="">
+                                    <a data-v-8a22a304="" class=""><code>Asst Services, LLC.</code></a>
+                                    <a href="" data-v-8a22a304="" class=""></a>
+                                    <a href="" data-v-8a22a304="" class="">About</a>
+                                    <a href="" data-v-8a22a304="" class="">Privacy</a>
+                                    <a href="mailto:info@asstservices.com" data-v-8a22a304="" class="">Contact</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+            <div class="layout-base__modals" data-v-7e7e6235=""><!----></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

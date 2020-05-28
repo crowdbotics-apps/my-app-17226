@@ -1,0 +1,56 @@
+{% extends 'base/template.html' %}
+
+{% block content %}
+
+{% load static %}
+<div class="row">
+      <table style="margin-top: 55px" class="highlight">
+        <thead>
+          <tr>
+              <th>Service Name</th>
+              <th>Service Availability</th>
+              <th>Service Price</th>
+              <th>Get Started</th>
+          </tr>
+        </thead>
+    <tbody>
+{% for bookable in page_obj %}
+
+    <td><b>{{ bookable.name }}</b></td>
+    <td>
+        Days available:
+        {% with week_days='mon tue wed thu fri sat sun' %}
+            {% for day in week_days.split %}
+                {% if day in bookable.get_available_days %}
+                    <span>{{day|title}},</span>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+    </td>
+    <td><code>{{bookable.price}} {{ bookable.unit }}</code></td>
+    <td><a href="{% url 'service_booking' slug=bookable.slug %}">Learn More</a></td>
+
+    <div>
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+
+{% endfor %}
+    </tbody>
+
+    </table>
+{% endblock content %}
